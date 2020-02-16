@@ -1,4 +1,4 @@
-# Todo app - mobile.
+# Todo app - mobile ( Flutter ).
 
 It's the mobile app of a todo app that i did for study purposes.
 The idea is to make 3 applications.
