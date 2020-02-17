@@ -4,9 +4,8 @@ import '../services/task.dart';
 class Task extends StatefulWidget {
   @override
   _TaskState createState() => _TaskState();
-  final title;
   final userId;
-  Task({this.title, this.userId});
+  Task({this.userId});
 }
 
 class _TaskState extends State<Task> {

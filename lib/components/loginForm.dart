@@ -82,13 +82,13 @@ class FormLoginState extends State<FormLogin> {
                     }
 
                     var userData = loginResponse.user;
+                    String name = "${userData.firstName} ${userData.lastName}";
 
                     return Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => HomePage(
-                                title: Text(" ${userData.email}"),
-                                userId: userData.id)));
+                            builder: (context) =>
+                                HomePage(name: name, userId: userData.id)));
                   }
                 },
                 child: Text(
