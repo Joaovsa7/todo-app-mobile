@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/homepage.dart';
+import 'package:todo_app/screens/signUp.dart';
 import '../services/user.dart';
 
 class FormLogin extends StatefulWidget {
@@ -101,8 +102,11 @@ class FormLoginState extends State<FormLogin> {
               ),
             ),
             MaterialButton(
-              onPressed: null,
-              child: Text("Don't have an account? create now."),
+              onPressed: () {
+                return Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => SignUp()));
+              },
+              child: Text("Don't have an account? click here."),
             ),
           ],
         ),

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import '../components/renderTasks.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
+class HomePage extends StatelessWidget {
   final name;
   final userId;
   HomePage({this.name, this.userId});
-}
 
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               margin: EdgeInsets.only(left: 40),
                               child: Text(
-                                'Welcome ${widget.name}',
+                                'Welcome ${name}',
                                 style: const TextStyle(
                                   fontSize: 12,
                                   fontStyle: FontStyle.normal,
@@ -56,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Task(
-                userId: widget.userId,
+                userId: userId,
               ),
             ],
           ),
