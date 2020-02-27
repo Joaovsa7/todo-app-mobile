@@ -3,14 +3,7 @@ import 'package:todo_app/screens/homepage.dart';
 import 'package:todo_app/screens/signUp.dart';
 import '../services/user.dart';
 
-class FormLogin extends StatefulWidget {
-  @override
-  FormLoginState createState() {
-    return FormLoginState();
-  }
-}
-
-class FormLoginState extends State<FormLogin> {
+class FormLogin extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

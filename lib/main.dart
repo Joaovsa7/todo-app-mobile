@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'TODO APP',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Login()),
+      home: Login(),
     );
   }
 }

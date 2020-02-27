@@ -30,4 +30,26 @@ class UserService {
       return LoginResponse(error: true);
     });
   }
+
+  Future<RegisterResponse> register(Map data) async {
+    String url = 'http://10.0.2.2:4000/user/register';
+    Map headers = <String, String>{
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    Map userData = {"user": data};
+
+    return http
+        .post(url, headers: headers, body: jsonEncode(userData))
+        .then((data) {
+      var jsonData = jsonDecode(data.body);
+      RegisterResponse parsedData = RegisterResponse.fromJson(jsonData);
+      return parsedData;
+    }).catchError((error) {
+      print("catch error");
+      print(error);
+      return RegisterResponse(error: true);
+    });
+  }
 }
