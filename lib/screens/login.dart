@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/loginForm.dart';
 
-class Login extends StatefulWidget {
-  Login({Key key}) : super(key: key);
-
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
