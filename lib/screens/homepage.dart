@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/user.dart';
 import '../components/renderTasks.dart';
+import '../services/sharedPref.dart';
 
-class HomePage extends StatelessWidget {
-  final name;
-  final userId;
-  HomePage({this.name, this.userId});
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  User user;
+  void _getUserData() async {
+    SharedPref sharedPref = SharedPref();
+    User userData = User.fromJson(await sharedPref.read('userData'));
+    setState(() {
+      user = userData;
+    });
+    return null;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +57,7 @@ class HomePage extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(left: 40),
                               child: Text(
-                                'Welcome ${name}',
+                                'Welcome ${user?.firstName}',
                                 style: const TextStyle(
                                   fontSize: 12,
                                   fontStyle: FontStyle.normal,
@@ -51,9 +71,7 @@ class HomePage extends StatelessWidget {
                   )
                 ],
               ),
-              Task(
-                userId: userId,
-              ),
+              Tasks(),
             ],
           ),
         ),

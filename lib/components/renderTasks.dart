@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/task.dart';
+import 'package:todo_app/models/user.dart';
 import '../services/task.dart';
+import '../services/sharedPref.dart';
 
-class Task extends StatefulWidget {
+class Tasks extends StatefulWidget {
   @override
-  _TaskState createState() => _TaskState();
-  final userId;
-  Task({this.userId});
+  _TasksState createState() => _TasksState();
 }
 
-class _TaskState extends State<Task> {
+class _TasksState extends State<Tasks> {
   final tasksService = new TaskService();
-  List tasks = [];
+  final sharedPref = SharedPref();
+  List<TasksModel> tasks = [];
+
   @override
   void initState() {
     super.initState();
@@ -18,7 +21,8 @@ class _TaskState extends State<Task> {
   }
 
   _setTasksState() async {
-    var tasksOfUser = await tasksService.getTasksOfUser(widget.userId);
+    User user = User.fromJson(await sharedPref.read('userData'));
+    var tasksOfUser = await tasksService.getTasksOfUser(user.id);
     setState(() {
       tasks = tasksOfUser;
     });

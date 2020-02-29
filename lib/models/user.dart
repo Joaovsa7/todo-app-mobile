@@ -2,21 +2,20 @@ class LoginResponse {
   User user;
   bool auth;
   String token;
-  bool error;
-  String errorMessage;
+  String error;
 
   LoginResponse({
     this.user,
     this.auth = false,
     this.token,
-    this.error = false,
-    this.errorMessage,
+    this.error,
   });
 
   LoginResponse.fromJson(Map<String, dynamic> json) {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     auth = json['auth'];
     token = json['token'];
+    error = json['error'];
   }
 
   Map<String, dynamic> toJson() {
@@ -26,6 +25,7 @@ class LoginResponse {
     }
     data['auth'] = this.auth;
     data['token'] = this.token;
+    data['error'] = this.error;
     return data;
   }
 }
@@ -71,62 +71,6 @@ class User {
     data['lastName'] = this.lastName;
     data['email'] = this.email;
     data['__v'] = this.iV;
-    return data;
-  }
-}
-
-class RegisterResponse {
-  String message;
-  Data data;
-  bool error;
-
-  RegisterResponse({this.error, this.message, this.data});
-
-  RegisterResponse.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
-    }
-    return data;
-  }
-}
-
-class Data {
-  String password;
-  int status;
-  String sId;
-  String firstName;
-  String lastName;
-  String email;
-
-  Data({
-    this.password,
-    this.status,
-    this.sId,
-    this.firstName,
-    this.lastName,
-    this.email,
-  });
-
-  Data.fromJson(Map<String, dynamic> json) {
-    password = json['password'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    email = json['email'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['password'] = this.password;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['email'] = this.email;
     return data;
   }
 }

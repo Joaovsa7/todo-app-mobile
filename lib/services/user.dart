@@ -27,11 +27,11 @@ class UserService {
     }).catchError((error) {
       print("catch error");
       print(error);
-      return LoginResponse(error: true);
+      return LoginResponse(error: error);
     });
   }
 
-  Future<RegisterResponse> register(Map data) async {
+  Future<LoginResponse> register(Map data) async {
     String url = 'http://10.0.2.2:4000/user/register';
     Map headers = <String, String>{
       'Content-type': 'application/json',
@@ -44,12 +44,12 @@ class UserService {
         .post(url, headers: headers, body: jsonEncode(userData))
         .then((data) {
       var jsonData = jsonDecode(data.body);
-      RegisterResponse parsedData = RegisterResponse.fromJson(jsonData);
+      LoginResponse parsedData = LoginResponse.fromJson(jsonData);
       return parsedData;
     }).catchError((error) {
       print("catch error");
       print(error);
-      return RegisterResponse(error: true);
+      return LoginResponse(error: error);
     });
   }
 }
