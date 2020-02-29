@@ -6,7 +6,6 @@ class TasksModel {
   String title;
   String description;
   String userId;
-  int iV;
   bool error;
   String errorMessage;
   String successMessage;
@@ -19,7 +18,6 @@ class TasksModel {
       this.title,
       this.description,
       this.userId,
-      this.iV,
       this.error,
       this.errorMessage,
       this.successMessage});
@@ -32,7 +30,6 @@ class TasksModel {
     title = json['title'];
     description = json['description'];
     userId = json['user_id'];
-    iV = json['__v'];
     successMessage = json['success'];
   }
 
@@ -45,7 +42,6 @@ class TasksModel {
     data['title'] = this.title;
     data['description'] = this.description;
     data['user_id'] = this.userId;
-    data['__v'] = this.iV;
     data['error'] = this.errorMessage;
     return data;
   }

@@ -4,6 +4,7 @@ import '../models/task.dart';
 
 class TaskService {
   Future<List<TasksModel>> getTasksOfUser(String id) async {
+    if (id == null) return null;
     String url = 'http://10.0.2.2:4000/task/user/$id';
     Map headers = <String, String>{
       'Content-type': 'application/json',
@@ -18,6 +19,7 @@ class TaskService {
         TasksModel task = TasksModel.fromJson(t);
         tasksList.add(task);
       }
+
       return tasksList;
     }).catchError((error) {
       print(error);

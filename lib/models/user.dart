@@ -2,21 +2,20 @@ class LoginResponse {
   User user;
   bool auth;
   String token;
-  bool error;
-  String errorMessage;
+  String error;
 
   LoginResponse({
     this.user,
     this.auth = false,
     this.token,
-    this.error = false,
-    this.errorMessage,
+    this.error,
   });
 
   LoginResponse.fromJson(Map<String, dynamic> json) {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     auth = json['auth'];
     token = json['token'];
+    error = json['error'];
   }
 
   Map<String, dynamic> toJson() {
@@ -26,6 +25,7 @@ class LoginResponse {
     }
     data['auth'] = this.auth;
     data['token'] = this.token;
+    data['error'] = this.error;
     return data;
   }
 }
