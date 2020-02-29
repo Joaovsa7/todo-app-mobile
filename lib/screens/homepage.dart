@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               margin: EdgeInsets.only(left: 40),
                               child: Text(
-                                'Welcome ${user?.firstName}',
+                                'Welcome ${user.firstName} ${user.lastName}',
                                 style: const TextStyle(
                                   fontSize: 12,
                                   fontStyle: FontStyle.normal,
