@@ -65,9 +65,6 @@ class FormLogin extends StatelessWidget {
                 child: RaisedButton(
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text('wait...')));
-
                       var loginResponse = await userService.login(
                           emailController.text.trim(),
                           passwordController.text.trim());
@@ -77,8 +74,8 @@ class FormLogin extends StatelessWidget {
                             content: Text(
                                 'User not found, maybe the user or password are incorrect')));
                       }
-
                       var userData = loginResponse.user;
+                      userData.token = loginResponse.token;
                       await sharedPref.save('userData', userData);
                       return Navigator.pushNamed(context, '/dashboard');
                     }
@@ -96,7 +93,8 @@ class FormLogin extends StatelessWidget {
               MaterialButton(
                 child: Text("Don't have an account? click here."),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/register');
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/register', ModalRoute.withName('/'));
                 },
               ),
             ],

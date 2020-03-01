@@ -38,6 +38,7 @@ class User {
   String firstName;
   String lastName;
   String email;
+  String token;
   int iV;
 
   User(
@@ -48,7 +49,8 @@ class User {
       this.firstName,
       this.lastName,
       this.email,
-      this.iV});
+      this.iV,
+      this.token});
 
   User.fromJson(Map<String, dynamic> json) {
     password = json['password'];
@@ -59,6 +61,7 @@ class User {
     lastName = json['lastName'];
     email = json['email'];
     iV = json['__v'];
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -71,6 +74,7 @@ class User {
     data['lastName'] = this.lastName;
     data['email'] = this.email;
     data['__v'] = this.iV;
+    data['token'] = this.token;
     return data;
   }
 }
