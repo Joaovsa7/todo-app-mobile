@@ -22,14 +22,14 @@ class _TasksState extends State<Tasks> {
   }
 
   void _deleteTask(String id, String token) async {
-    var message = await tasksService.deleteTask(id, token);
+    var message = await tasksService.delete(id, token);
     _getUserAndTasks();
     return null;
   }
 
   _getUserAndTasks() async {
     User user = User.fromJson(await sharedPref.read('userData'));
-    var tasksOfUser = await tasksService.getTasksOfUser(user.id, user.token);
+    var tasksOfUser = await tasksService.getByUser(user.id, user.token);
     setState(() {
       token = user.token;
       tasks = tasksOfUser;
