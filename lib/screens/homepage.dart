@@ -55,7 +55,9 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.black87,
           label: Text('Add a task'),
           icon: Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            return Navigator.pushNamed(context, '/create');
+          },
         ),
         bottomNavigationBar: BottomAppBar(
           color: Colors.blue,

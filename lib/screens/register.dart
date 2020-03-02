@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import '../widgets/header.dart';
 import '../services/user.dart';
 
 class Register extends StatelessWidget {
@@ -31,38 +32,7 @@ class Register extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    Text(
-                                      'Sign up',
-                                      style: TextStyle(
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    IconButton(
-                                      onPressed: () {
-                                        return Navigator.pop(context);
-                                      },
-                                      icon: Icon(
-                                        Icons.navigate_before,
-                                        size: 35,
-                                      ),
-                                      color: Colors.blue,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                          headerApp(context, 'Sign up'),
                           Form(
                             key: _formKey,
                             child: Column(
