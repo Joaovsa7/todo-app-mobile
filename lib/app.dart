@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/createTask.dart';
 import './screens/register.dart';
 import './screens/homepage.dart';
 import './screens/login.dart';
@@ -15,6 +16,7 @@ class TodoApp extends StatelessWidget {
         '/': (context) => Login(),
         '/register': (context) => Register(),
         '/dashboard': (context) => HomePage(),
+        '/create': (context) => CreateTask()
       },
     );
   }

@@ -10,11 +10,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   User user;
-  void _getUserData() async {
+  void _getUserData(state) async {
     SharedPref sharedPref = SharedPref();
     User userData = User.fromJson(await sharedPref.read('userData'));
     setState(() {
-      user = userData;
+      state = userData;
     });
     return null;
   }
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _getUserData();
+    _getUserData(user);
   }
 
   @override
@@ -30,42 +30,18 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: Column(
             children: <Widget>[
               Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Text(
-                              'Latest tasks',
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontStyle: FontStyle.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(left: 40),
-                              child: Text(
-                                'Welcome ${user.firstName} ${user.lastName}',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontStyle: FontStyle.normal,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    child: Text(
+                      'All Tasks',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.w100),
                     ),
                   )
                 ],
@@ -74,20 +50,37 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0, // this will be set when a new tab is tapped
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.add),
-              title: new Text('Add new Task'),
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text('Profile'))
-          ],
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.black87,
+          label: Text('Add a task'),
+          icon: Icon(Icons.add),
+          onPressed: () {
+            return Navigator.pushNamed(context, '/create');
+          },
+        ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.blue,
+          child: new Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

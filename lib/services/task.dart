@@ -3,12 +3,13 @@ import 'dart:convert';
 import '../models/task.dart';
 
 class TaskService {
-  Future<List<TasksModel>> getTasksOfUser(String id) async {
+  Future<List<TasksModel>> getByUser(String id, String token) async {
     if (id == null) return null;
-    String url = 'http://10.0.2.2:4000/task/user/$id';
+    String url = 'https://backend-todo-app.herokuapp.com/task/user/$id';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
+      'token': token
     };
 
     return http.get(url, headers: headers).then((data) {
@@ -23,7 +24,47 @@ class TaskService {
       return tasksList;
     }).catchError((error) {
       print(error);
-      return error;
+      return TasksModel(error: error);
+    });
+  }
+
+  Future<TasksModel> create(Map formData, String token) async {
+    if (formData == null) return null;
+    String url = 'https://backend-todo-app.herokuapp.com/task/create';
+    Map headers = <String, String>{
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'token': token
+    };
+
+    print(formData);
+    return http
+        .post(url, headers: headers, body: json.encode(formData))
+        .then((data) {
+      var result = json.decode(data.body);
+      return TasksModel.fromJson(result);
+    }).catchError((error) {
+      print(error);
+      return TasksModel(error: error);
+    });
+  }
+
+  Future<TasksModel> delete(String id, String token) async {
+    if (id == null) return null;
+    String url = 'https://backend-todo-app.herokuapp.com/task/delete/$id';
+    Map headers = <String, String>{
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'token': token
+    };
+
+    return http.post(url, headers: headers).then((data) {
+      var result = json.decode(data.body);
+      TasksModel message = result['sucess'];
+      return message;
+    }).catchError((error) {
+      print(error);
+      return TasksModel(error: error);
     });
   }
 }

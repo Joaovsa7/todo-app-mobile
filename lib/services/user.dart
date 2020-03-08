@@ -6,7 +6,7 @@ class UserService {
   UserService() : super();
 
   Future<LoginResponse> login(String email, String password) async {
-    String url = 'http://10.0.2.2:4000/user/login';
+    String url = 'https://backend-todo-app.herokuapp.com/user/login';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -32,7 +32,7 @@ class UserService {
   }
 
   Future<LoginResponse> register(Map data) async {
-    String url = 'http://10.0.2.2:4000/user/register';
+    String url = 'https://backend-todo-app.herokuapp.com/user/register';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
