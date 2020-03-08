@@ -5,7 +5,7 @@ import '../models/task.dart';
 class TaskService {
   Future<List<TasksModel>> getByUser(String id, String token) async {
     if (id == null) return null;
-    String url = 'http://10.0.2.2:4000/task/user/$id';
+    String url = 'https://backend-todo-app.herokuapp.com/task/user/$id';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -28,19 +28,21 @@ class TaskService {
     });
   }
 
-  Future<TasksModel> create(String id, String token) async {
-    if (id == null) return null;
-    String url = 'http://10.0.2.2:4000/task/delete/$id';
+  Future<TasksModel> create(Map formData, String token) async {
+    if (formData == null) return null;
+    String url = 'https://backend-todo-app.herokuapp.com/task/create';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'token': token
     };
 
-    return http.post(url, headers: headers).then((data) {
+    print(formData);
+    return http
+        .post(url, headers: headers, body: json.encode(formData))
+        .then((data) {
       var result = json.decode(data.body);
-      TasksModel message = result['sucess'];
-      return message;
+      return TasksModel.fromJson(result);
     }).catchError((error) {
       print(error);
       return TasksModel(error: error);
@@ -49,7 +51,7 @@ class TaskService {
 
   Future<TasksModel> delete(String id, String token) async {
     if (id == null) return null;
-    String url = 'http://10.0.2.2:4000/task/delete/$id';
+    String url = 'https://backend-todo-app.herokuapp.com/task/delete/$id';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',

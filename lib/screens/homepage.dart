@@ -10,11 +10,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   User user;
-  void _getUserData() async {
+  void _getUserData(state) async {
     SharedPref sharedPref = SharedPref();
     User userData = User.fromJson(await sharedPref.read('userData'));
     setState(() {
-      user = userData;
+      state = userData;
     });
     return null;
   }
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _getUserData();
+    _getUserData(user);
   }
 
   @override

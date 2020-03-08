@@ -41,6 +41,7 @@ class TasksModel {
     data['description'] = this.description;
     data['user_id'] = this.userId;
     data['error'] = this.error;
+    data['success'] = this.success;
     return data;
   }
 }
