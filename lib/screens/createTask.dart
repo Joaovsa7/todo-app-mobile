@@ -141,7 +141,7 @@ class _CreateTaskState extends State<CreateTask> {
                                 var response = await _taskService.create(
                                     taskData, userData.token);
 
-                                if (response.success != null) {
+                                if (response.message != null) {
                                   return Navigator.pushNamed(
                                       context, '/dashboard');
                                 }

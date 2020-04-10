@@ -16,6 +16,10 @@ class TaskService {
       var result = json.decode(data.body);
       var tasks = result["tasks"];
       List<TasksModel> tasksList = [];
+      if (tasks == null) {
+        return tasksList;
+      }
+
       for (var t in tasks) {
         TasksModel task = TasksModel.fromJson(t);
         tasksList.add(task);
@@ -37,7 +41,6 @@ class TaskService {
       'token': token
     };
 
-    print(formData);
     return http
         .post(url, headers: headers, body: json.encode(formData))
         .then((data) {
@@ -60,8 +63,7 @@ class TaskService {
 
     return http.post(url, headers: headers).then((data) {
       var result = json.decode(data.body);
-      TasksModel message = result['sucess'];
-      return message;
+      return TasksModel.fromJson(result);
     }).catchError((error) {
       print(error);
       return TasksModel(error: error);

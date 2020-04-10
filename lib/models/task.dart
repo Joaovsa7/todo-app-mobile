@@ -7,7 +7,7 @@ class TasksModel {
   String description;
   String userId;
   String error;
-  String success;
+  String message;
 
   TasksModel(
       {this.done,
@@ -18,7 +18,7 @@ class TasksModel {
       this.description,
       this.userId,
       this.error,
-      this.success});
+      this.message});
 
   TasksModel.fromJson(Map<String, dynamic> json) {
     done = json['done'];
@@ -28,7 +28,7 @@ class TasksModel {
     title = json['title'];
     description = json['description'];
     userId = json['user_id'];
-    success = json['success'];
+    message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,7 +41,7 @@ class TasksModel {
     data['description'] = this.description;
     data['user_id'] = this.userId;
     data['error'] = this.error;
-    data['success'] = this.success;
+    data['message'] = this.message;
     return data;
   }
 }
