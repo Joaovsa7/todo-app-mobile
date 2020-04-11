@@ -8,17 +8,20 @@ class TasksModel {
   String userId;
   String error;
   String message;
+  String resume;
 
-  TasksModel(
-      {this.done,
-      this.createdAt,
-      this.status,
-      this.id,
-      this.title,
-      this.description,
-      this.userId,
-      this.error,
-      this.message});
+  TasksModel({
+    this.done,
+    this.createdAt,
+    this.status,
+    this.id,
+    this.title,
+    this.description,
+    this.userId,
+    this.error,
+    this.message,
+    this.resume,
+  });
 
   TasksModel.fromJson(Map<String, dynamic> json) {
     done = json['done'];
@@ -29,6 +32,7 @@ class TasksModel {
     description = json['description'];
     userId = json['user_id'];
     message = json['message'];
+    resume = json['resume'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +46,7 @@ class TasksModel {
     data['user_id'] = this.userId;
     data['error'] = this.error;
     data['message'] = this.message;
+    data['resume'] = this.resume;
     return data;
   }
 }

@@ -20,9 +20,9 @@ class TaskService {
         return tasksList;
       }
 
-      for (var t in tasks) {
-        TasksModel task = TasksModel.fromJson(t);
-        tasksList.add(task);
+      for (var task in tasks) {
+        TasksModel taskJson = TasksModel.fromJson(task);
+        tasksList.add(taskJson);
       }
 
       return tasksList;

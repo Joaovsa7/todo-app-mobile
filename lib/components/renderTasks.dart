@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/task.dart';
 import 'package:todo_app/models/user.dart';
+import 'package:todo_app/screens/todoDetails.dart';
 import '../services/task.dart';
 import '../services/sharedPref.dart';
 
@@ -95,15 +96,28 @@ class _TasksState extends State<Tasks> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Icon(
-                              taskDone ? Icons.done : Icons.clear,
-                              color: taskDone ? Colors.green : Colors.red,
+                              taskDone != false ? Icons.done : Icons.clear,
+                              color:
+                                  taskDone != false ? Colors.green : Colors.red,
                               size: 16,
                             )
                           ],
                         ),
-                        trailing: Icon(
-                          Icons.arrow_forward,
-                          size: 16,
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            size: 16,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TodoDetail(),
+                                  settings: RouteSettings(
+                                    arguments: tasks[index],
+                                  ),
+                                ));
+                          },
                         ),
                         dense: true,
                         title: Text(title),

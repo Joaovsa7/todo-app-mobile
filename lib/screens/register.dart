@@ -7,7 +7,6 @@ class Register extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final userService = new UserService();
   final formData = new Map();
-  final globalKey = GlobalKey<ScaffoldState>();
 
   String _defaultFieldValidator(value) {
     if (value.trim().isEmpty) {

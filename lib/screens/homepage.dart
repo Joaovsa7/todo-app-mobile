@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
     SharedPref sharedPref = SharedPref();
     User userData = User.fromJson(await sharedPref.read('userData'));
     setState(() {
-      state = userData;
+      user = userData;
     });
     return null;
   }
@@ -30,19 +30,33 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
           child: Column(
             children: <Widget>[
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    child: Text(
-                      'All Tasks',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w100),
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Welcome ${user?.firstName} ${user?.lastName}',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300),
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        'All Tasks',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w100),
+                      ),
+                    ],
                   )
                 ],
               ),

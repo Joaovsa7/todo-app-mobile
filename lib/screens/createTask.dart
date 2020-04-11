@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_app/models/task.dart';
 import 'package:todo_app/models/user.dart';
 import 'package:todo_app/services/sharedPref.dart';
 import 'package:todo_app/services/task.dart';
@@ -15,7 +16,7 @@ class CreateTask extends StatefulWidget {
 
 class _CreateTaskState extends State<CreateTask> {
   final _formKey = GlobalKey<FormState>();
-  final formData = new Map();
+  TasksModel formData = new TasksModel();
   String dueDate;
   String dueTime;
 
@@ -92,15 +93,15 @@ class _CreateTaskState extends State<CreateTask> {
                             textAlign: TextAlign.left,
                             validator: (value) => _defaultFieldValidator(value),
                             onChanged: (value) {
-                              formData['title'] = value;
+                              formData.title = value;
                             },
-                            decoration: inputStyle('Name', 'Buy an ferrari'),
+                            decoration: inputStyle('Title', 'Buy an ferrari'),
                           ),
                           TextFormField(
                             textAlign: TextAlign.left,
                             validator: (value) => _defaultFieldValidator(value),
                             onChanged: (value) {
-                              formData['resume'] = value;
+                              formData.resume = value;
                             },
                             decoration: inputStyle(
                               'Resume',
@@ -115,8 +116,9 @@ class _CreateTaskState extends State<CreateTask> {
                           TextFormField(
                             minLines: 1,
                             maxLines: 4,
+                            validator: (value) => _defaultFieldValidator(value),
                             onChanged: (value) {
-                              formData['description'] = value;
+                              formData.description = value;
                             },
                             decoration: inputStyle(
                               'Description',
@@ -124,7 +126,8 @@ class _CreateTaskState extends State<CreateTask> {
                             ),
                           ),
                           RaisedButton(
-                            child: Text('Create'),
+                            child: Text('Create the task ${formData?.title}'),
+                            color: Colors.blue,
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 SharedPref _sharedPref = SharedPref();
@@ -132,15 +135,15 @@ class _CreateTaskState extends State<CreateTask> {
                                     await _sharedPref.read('userData'));
 
                                 Map<String, dynamic> taskData = {
-                                  ...formData,
+                                  ...formData.toJson(),
                                   'dueDate': dueDate,
                                   'dueTime': dueTime,
                                   'userId': userData.id
                                 };
-
+                                print("oie");
+                                print(taskData);
                                 var response = await _taskService.create(
                                     taskData, userData.token);
-
                                 if (response.message != null) {
                                   return Navigator.pushNamed(
                                       context, '/dashboard');
