@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_app/helpers/daysMap.dart';
 import 'package:todo_app/models/user.dart';
 import '../components/renderTasks.dart';
 import '../services/sharedPref.dart';
@@ -27,38 +29,71 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = new DateTime.now();
+    String dayNumber = DateTime.parse(now.toString()).weekday.toString();
+    String todayName = dayMap[dayNumber];
+    TimeOfDay _time = TimeOfDay.now();
+    String formatedTime = _time.format(context);
+
     return SafeArea(
       child: Scaffold(
         body: Container(
           margin: EdgeInsets.fromLTRB(15, 25, 15, 0),
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Welcome ${user?.firstName} ${user?.lastName}',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w300),
-                      )
-                    ],
+              Container(
+                height: 100,
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                decoration: new BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(2),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'All Tasks',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w100),
-                      ),
-                    ],
-                  )
-                ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Welcome ${user?.firstName} ${user?.lastName}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        Text(
+                          '$todayName, $formatedTime.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'All Tasks',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w100),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
               Tasks(),
             ],
@@ -74,7 +109,6 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         bottomNavigationBar: BottomAppBar(
-          color: Colors.blue,
           child: new Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

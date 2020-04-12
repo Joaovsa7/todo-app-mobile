@@ -7,6 +7,12 @@ class Details extends StatelessWidget {
   Widget build(BuildContext context) {
     final TasksModel task = ModalRoute.of(context).settings.arguments;
 
+    const subtitleStyle = TextStyle(
+      fontSize: 14,
+      color: Colors.black26,
+      fontWeight: FontWeight.bold,
+    );
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -22,34 +28,52 @@ class Details extends StatelessWidget {
                       margin: EdgeInsets.only(top: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          Text('TITLE', style: subtitleStyle),
                           Container(
-                            margin: EdgeInsets.only(bottom: 10),
                             child: Text(
                               task.title,
                               style: TextStyle(
-                                  fontSize: 36,
-                                  color: Colors.black45,
+                                  fontSize: 24,
+                                  color: Colors.black87,
                                   fontWeight: FontWeight.w300),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(bottom: 10),
                             child: Text(
-                              'Resume of ${task.title}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black45,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              'RESUME',
+                              style: subtitleStyle,
                             ),
                           ),
                           Text(
                             task.resume,
                             style: TextStyle(
-                              color: Colors.black45,
+                              color: Colors.black87,
                               fontWeight: FontWeight.normal,
                             ),
+                          ),
+                          Text(
+                            'DESCRIPTION',
+                            style: subtitleStyle,
+                          ),
+                          Text(
+                            task.description,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          Text(
+                            'STATUS',
+                            style: subtitleStyle,
+                          ),
+                          Text(
+                            task.done == true ? 'DONE' : 'UNDONE',
+                            style: TextStyle(
+                                color: task.done == true
+                                    ? Colors.red
+                                    : Colors.green),
                           ),
                         ],
                       ),

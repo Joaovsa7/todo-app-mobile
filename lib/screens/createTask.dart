@@ -125,32 +125,45 @@ class _CreateTaskState extends State<CreateTask> {
                               'Oh my god, with my ferrari i will do a lot of trips',
                             ),
                           ),
-                          RaisedButton(
-                            child: Text('Create the task ${formData?.title}'),
-                            color: Colors.blue,
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                SharedPref _sharedPref = SharedPref();
-                                User userData = User.fromJson(
-                                    await _sharedPref.read('userData'));
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Container(
+                                width: 120,
+                                margin: EdgeInsets.only(top: 10),
+                                child: RaisedButton(
+                                  child: Text(
+                                    'Create',
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .body1,
+                                  ),
+                                  color: Theme.of(context).primaryColor,
+                                  onPressed: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      SharedPref _sharedPref = SharedPref();
+                                      User userData = User.fromJson(
+                                          await _sharedPref.read('userData'));
 
-                                Map<String, dynamic> taskData = {
-                                  ...formData.toJson(),
-                                  'dueDate': dueDate,
-                                  'dueTime': dueTime,
-                                  'userId': userData.id
-                                };
-                                print("oie");
-                                print(taskData);
-                                var response = await _taskService.create(
-                                    taskData, userData.token);
-                                if (response.message != null) {
-                                  return Navigator.pushNamed(
-                                      context, '/dashboard');
-                                }
-                              }
-                              return null;
-                            },
+                                      Map<String, dynamic> taskData = {
+                                        ...formData.toJson(),
+                                        'dueDate': dueDate,
+                                        'dueTime': dueTime,
+                                        'userId': userData.id
+                                      };
+
+                                      var response = await _taskService.create(
+                                          taskData, userData.token);
+                                      if (response.message != null) {
+                                        return Navigator.pushNamed(
+                                            context, '/dashboard');
+                                      }
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              )
+                            ],
                           )
                         ],
                       ),

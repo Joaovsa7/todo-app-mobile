@@ -3,6 +3,7 @@ import 'package:todo_app/screens/createTask.dart';
 import './screens/register.dart';
 import './screens/homepage.dart';
 import './screens/login.dart';
+import 'helpers/defineTheme.dart';
 
 class TodoApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,6 +13,7 @@ class TodoApp extends StatelessWidget {
       title: 'TODO APP',
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      theme: defineTheme(),
       routes: {
         '/': (context) => Login(),
         '/register': (context) => Register(),
