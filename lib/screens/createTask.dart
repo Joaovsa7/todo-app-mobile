@@ -19,6 +19,7 @@ class _CreateTaskState extends State<CreateTask> {
   TasksModel formData = new TasksModel();
   String dueDate;
   String dueTime;
+  DateTime pickedDated;
 
   final _taskService = new TaskService();
 
@@ -76,7 +77,6 @@ class _CreateTaskState extends State<CreateTask> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.all(20),
@@ -95,7 +95,7 @@ class _CreateTaskState extends State<CreateTask> {
                             onChanged: (value) {
                               formData.title = value;
                             },
-                            decoration: inputStyle('Title', 'Buy an ferrari'),
+                            decoration: inputStyle('title', 'Buy an ferrari'),
                           ),
                           TextFormField(
                             textAlign: TextAlign.left,
@@ -144,7 +144,6 @@ class _CreateTaskState extends State<CreateTask> {
                                       SharedPref _sharedPref = SharedPref();
                                       User userData = User.fromJson(
                                           await _sharedPref.read('userData'));
-
                                       Map<String, dynamic> taskData = {
                                         ...formData.toJson(),
                                         'dueDate': dueDate,
@@ -186,7 +185,7 @@ Widget timeCard(
   return Container(
     margin: EdgeInsets.fromLTRB(0, topMargin, 0, 15),
     decoration: new BoxDecoration(
-      color: Colors.white,
+      color: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.all(
         Radius.circular(4),
       ),

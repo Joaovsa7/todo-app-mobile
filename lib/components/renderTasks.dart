@@ -23,6 +23,11 @@ class _TasksState extends State<Tasks> {
     _getUserAndTasks();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<TasksModel> _deleteTask(String id, String token) async {
     TasksModel response = await tasksService.delete(id, token);
     return response;
@@ -60,6 +65,8 @@ class _TasksState extends State<Tasks> {
             String description = tasks[index].description;
             String id = tasks[index].id;
             bool taskDone = tasks[index].done;
+            IconData rightIcon = taskDone ? Icons.done : Icons.clear;
+
             return Dismissible(
               key: Key('$tasks[index].hashCode'),
               background: dismissableIcon(
@@ -96,8 +103,8 @@ class _TasksState extends State<Tasks> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(
-                        taskDone != false ? Icons.done : Icons.clear,
-                        color: taskDone != false ? Colors.green : Colors.red,
+                        rightIcon,
+                        color: taskDone ? Colors.green : Colors.red,
                         size: 16,
                       )
                     ],
@@ -108,7 +115,7 @@ class _TasksState extends State<Tasks> {
                       size: 16,
                     ),
                     onPressed: () {
-                      Navigator.push(
+                      return Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => Details(),

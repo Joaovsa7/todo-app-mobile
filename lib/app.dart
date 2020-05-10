@@ -13,7 +13,7 @@ class TodoApp extends StatelessWidget {
       title: 'TODO APP',
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      theme: defineTheme(),
+      theme: defineTheme('night'),
       routes: {
         '/': (context) => Login(),
         '/register': (context) => Register(),

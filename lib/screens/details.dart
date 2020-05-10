@@ -75,6 +75,10 @@ class Details extends StatelessWidget {
                                     ? Colors.red
                                     : Colors.green),
                           ),
+                          Text('${task.dueTime} ${task.dueDate}',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ))
                         ],
                       ),
                       decoration: new BoxDecoration(

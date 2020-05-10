@@ -11,7 +11,6 @@ class Login extends StatelessWidget {
             new Expanded(
               flex: 1,
               child: Container(
-                color: Colors.blue,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -26,10 +25,9 @@ class Login extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 36,
-                              color: Colors.white,
                             ),
                           ),
-                          Text('Management of daily tasks.'),
+                          Text('Deal with daily tasks.'),
                         ],
                       ),
                     )

@@ -1,12 +1,12 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_app/models/user.dart';
 import 'dart:convert';
 
 class UserService {
-  UserService() : super();
-
+  String apiUrl = DotEnv().env['API_LOCAL'];
   Future<LoginResponse> login(String email, String password) async {
-    String url = 'https://backend-todo-app.herokuapp.com/user/login';
+    String url = '$apiUrl/user/login';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -32,7 +32,7 @@ class UserService {
   }
 
   Future<LoginResponse> register(Map data) async {
-    String url = 'https://backend-todo-app.herokuapp.com/user/register';
+    String url = '$apiUrl/user/register';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',

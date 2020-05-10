@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import '../services/sharedPref.dart';
 import '../services/user.dart';
 
-class FormLogin extends StatelessWidget {
+class FormLogin extends StatefulWidget {
+  @override
+  _FormLoginState createState() => _FormLoginState();
+}
+
+class _FormLoginState extends State<FormLogin> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final userService = new UserService();
   final sharedPref = SharedPref();
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,31 +70,43 @@ class FormLogin extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: 10),
                 child: RaisedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-                      var loginResponse = await userService.login(
-                          emailController.text.trim(),
-                          passwordController.text.trim());
+                  color: Theme.of(context).primaryColor,
+                  onPressed: !isLoading
+                      ? () async {
+                          if (_formKey.currentState.validate()) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            var loginResponse = await userService
+                                .login(emailController.text.trim(),
+                                    passwordController.text.trim())
+                                .catchError((err) {
+                              print(err);
+                              setState(() {
+                                isLoading = false;
+                              });
+                            });
 
-                      if (loginResponse.auth == false) {
-                        return Scaffold.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                'User not found, maybe the user or password are incorrect')));
-                      }
-                      var userData = loginResponse.user;
-                      userData.token = loginResponse.token;
-                      await sharedPref.save('userData', userData);
-                      return Navigator.pushNamed(context, '/dashboard');
-                    }
-                    return null;
-                  },
-                  child: Text(
-                    'Log in',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: Colors.blue,
+                            if (loginResponse.auth == false) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              return Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      'User not found, maybe the user or password are incorrect')));
+                            }
+                            var userData = loginResponse.user;
+                            userData.token = loginResponse.token;
+                            await sharedPref.save('userData', userData);
+                            setState(() {
+                              isLoading = false;
+                            });
+                            return Navigator.pushNamed(context, '/dashboard');
+                          }
+                          return null;
+                        }
+                      : null,
+                  child: Text(isLoading ? 'Loading...' : 'Log in'),
                 ),
               ),
               MaterialButton(

@@ -9,6 +9,8 @@ class TasksModel {
   String error;
   String message;
   String resume;
+  String dueTime;
+  String dueDate;
 
   TasksModel({
     this.done,
@@ -33,6 +35,8 @@ class TasksModel {
     userId = json['user_id'];
     message = json['message'];
     resume = json['resume'];
+    dueTime = json['dueTime'];
+    dueDate = json['dueDate'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +51,8 @@ class TasksModel {
     data['error'] = this.error;
     data['message'] = this.message;
     data['resume'] = this.resume;
+    data['dueDate'] = this.dueDate;
+    data['dueTime'] = this.dueTime;
     return data;
   }
 }

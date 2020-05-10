@@ -10,9 +10,8 @@ Widget headerApp(BuildContext context, String text) {
             Text(
               text,
               style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black45),
+                fontSize: 28,
+              ),
             ),
           ],
         ),
@@ -26,7 +25,6 @@ Widget headerApp(BuildContext context, String text) {
                 Icons.keyboard_arrow_left,
                 size: 35,
               ),
-              color: Colors.black45,
             ),
           ],
         ),

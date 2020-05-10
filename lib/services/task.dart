@@ -1,11 +1,13 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/task.dart';
 
 class TaskService {
+  String apiUrl = DotEnv().env['API_LOCAL'];
   Future<List<TasksModel>> getByUser(String id, String token) async {
     if (id == null) return null;
-    String url = 'https://backend-todo-app.herokuapp.com/task/user/$id';
+    String url = '$apiUrl/task/user/$id';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -34,7 +36,7 @@ class TaskService {
 
   Future<TasksModel> create(Map formData, String token) async {
     if (formData == null) return null;
-    String url = 'https://backend-todo-app.herokuapp.com/task/create';
+    String url = '$apiUrl/task/create';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',
@@ -54,7 +56,7 @@ class TaskService {
 
   Future<TasksModel> delete(String id, String token) async {
     if (id == null) return null;
-    String url = 'https://backend-todo-app.herokuapp.com/task/delete/$id';
+    String url = '$apiUrl/task/delete/$id';
     Map headers = <String, String>{
       'Content-type': 'application/json',
       'Accept': 'application/json',

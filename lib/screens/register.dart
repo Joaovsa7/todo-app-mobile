@@ -19,7 +19,6 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: Builder(
           builder: (BuildContext context) {
             return SingleChildScrollView(
